@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "799811531427",
+    "project_id": "holding-simulator",
+    "storage_bucket": "holding-simulator.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:799811531427:android:72384936daca085504c516",
+        "android_client_info": {
+          "package_name": "com.aistudio.holdingsim.txby"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "799811531427-tc91elpm6d0sng4dkuhv8tkoa6op14lk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZ6oGKpqi32vtmZlxRD-NLDU2QPwBFlJk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "799811531427-tc91elpm6d0sng4dkuhv8tkoa6op14lk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
