@@ -1,0 +1,73 @@
+{
+  "entities": {
+    "HoldingLeaderboardEntry": {
+      "title": "HoldingLeaderboardEntry",
+      "description": "Public ranking profile and stats of a player holding",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "User UID who owns this holding"
+        },
+        "holdingName": {
+          "type": "string",
+          "description": "Holding brand name chosen by the player"
+        },
+        "ownerName": {
+          "type": "string",
+          "description": "Display name of the player"
+        },
+        "netWorth": {
+          "type": "number",
+          "description": "Total net worth of the holding in TL"
+        },
+        "cash": {
+          "type": "number",
+          "description": "Available cash"
+        },
+        "companyCount": {
+          "type": "number",
+          "description": "Number of companies owned"
+        },
+        "totalEmployees": {
+          "type": "number",
+          "description": "Total employees employed"
+        },
+        "prestige": {
+          "type": "number",
+          "description": "Prestige points earned"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation timestamp. Clients must submit FieldValue.serverTimestamp()."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last synced timestamp. Clients must submit FieldValue.serverTimestamp()."
+        }
+      },
+      "required": [
+        "userId",
+        "holdingName",
+        "ownerName",
+        "netWorth",
+        "cash",
+        "companyCount",
+        "totalEmployees",
+        "prestige",
+        "createdAt",
+        "updatedAt"
+      ]
+    }
+  },
+  "firestore": {
+    "/holdings/{holdingId}": {
+      "schema": {
+        "$ref": "#/entities/HoldingLeaderboardEntry"
+      },
+      "description": "Global competitive holding rankings and multiplayer player standings"
+    }
+  }
+}

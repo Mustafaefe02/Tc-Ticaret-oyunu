@@ -1,0 +1,6 @@
+{
+  "name": "Türkiye Holding Simulator",
+  "description": "50.000 TL ile başlayıp Türkiye'nin en büyük holding imparatorluğunu kurun! 8 sektör, borsa, banka, krizler ve Forbes sıralaması.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
