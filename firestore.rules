@@ -1,0 +1,49 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    function isValidHolding(data) {
+      return data.keys().hasAll([
+        'userId', 'holdingName', 'ownerName', 'netWorth', 'cash',
+        'companyCount', 'totalEmployees', 'prestige', 'createdAt', 'updatedAt'
+      ]) &&
+      data.userId is string && data.userId.size() > 0 &&
+      data.holdingName is string && data.holdingName.size() > 0 && data.holdingName.size() <= 80 &&
+      data.ownerName is string && data.ownerName.size() > 0 && data.ownerName.size() <= 60 &&
+      data.netWorth is number &&
+      data.cash is number &&
+      data.companyCount is number && data.companyCount >= 0 &&
+      data.totalEmployees is number && data.totalEmployees >= 0 &&
+      data.prestige is number && data.prestige >= 0 &&
+      data.createdAt is timestamp && data.createdAt <= request.time &&
+      data.updatedAt is timestamp && data.updatedAt <= request.time;
+    }
+
+    // Multiplayer Holdings Leaderboard
+    match /holdings/{holdingId} {
+      // Anyone authenticated can read global rankings
+      allow read: if isAuthenticated();
+
+      // Only the holding owner can create or update their own holding document (document ID is holding's userId)
+      allow create: if isOwner(request.resource.data.userId) &&
+                       holdingId == request.auth.uid &&
+                       isValidHolding(request.resource.data);
+
+      allow update: if isOwner(resource.data.userId) &&
+                       request.resource.data.userId == resource.data.userId &&
+                       request.resource.data.createdAt == resource.data.createdAt &&
+                       holdingId == request.auth.uid &&
+                       isValidHolding(request.resource.data);
+
+      allow delete: if isOwner(resource.data.userId);
+    }
+  }
+}
